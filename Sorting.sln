@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.27703.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Sorting", "Sorting\Sorting.csproj", "{6663CD8C-D7EC-412B-87B8-AF6A3D5F07EF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingTester", "SortingTester\SortingTester.csproj", "{8166CD84-AF14-42C8-9E88-B9FEE2E67325}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SortingTester", "SortingTester\SortingTester.csproj", "{5DEDB6E1-6F22-4606-ABA6-99E5894825EA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -17,10 +17,10 @@ Global
 		{6663CD8C-D7EC-412B-87B8-AF6A3D5F07EF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6663CD8C-D7EC-412B-87B8-AF6A3D5F07EF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6663CD8C-D7EC-412B-87B8-AF6A3D5F07EF}.Release|Any CPU.Build.0 = Release|Any CPU
-		{8166CD84-AF14-42C8-9E88-B9FEE2E67325}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{8166CD84-AF14-42C8-9E88-B9FEE2E67325}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{8166CD84-AF14-42C8-9E88-B9FEE2E67325}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{8166CD84-AF14-42C8-9E88-B9FEE2E67325}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5DEDB6E1-6F22-4606-ABA6-99E5894825EA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5DEDB6E1-6F22-4606-ABA6-99E5894825EA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5DEDB6E1-6F22-4606-ABA6-99E5894825EA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5DEDB6E1-6F22-4606-ABA6-99E5894825EA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

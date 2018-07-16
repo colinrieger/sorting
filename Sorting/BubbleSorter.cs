@@ -4,7 +4,7 @@ namespace Sorting
 {
     public class BubbleSorter : Sorter
     {
-        protected override void HandleSort(List<int> list, int version = 3)
+        protected override void HandleSort(List<int> list, int version)
         {
             switch (version)
             {
@@ -25,6 +25,7 @@ namespace Sorting
                     if (list[i - 1] > list[i])
                     {
                         list.Swap(i, i - 1);
+                        SwapCallback?.Invoke(i, i - 1);
                         swapped = true;
                     }
             }
@@ -41,6 +42,7 @@ namespace Sorting
                     if (list[i - 1] > list[i])
                     {
                         list.Swap(i, i - 1);
+                        SwapCallback?.Invoke(i, i - 1);
                         swapped = true;
                     }
                 end--; // at the end of each pass, we know the element at end is in its final position
@@ -57,6 +59,7 @@ namespace Sorting
                     if (list[i - 1] > list[i])
                     {
                         list.Swap(i, i - 1);
+                        SwapCallback?.Invoke(i, i - 1);
                         newEnd = i;
                     }
                 end = newEnd; // we know everything beyond newEnd is in its final position

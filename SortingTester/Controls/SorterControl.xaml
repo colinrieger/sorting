@@ -1,0 +1,45 @@
+﻿<UserControl x:Class="SortingTester.Controls.SorterControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:SortingTester.Controls"
+             xmlns:control = "clr-namespace:SortingTester.Controls" 
+             mc:Ignorable="d" 
+             d:DesignHeight="800" d:DesignWidth="800">
+    <UserControl.Resources>
+        <local:InverseBooleanConverter x:Key="InverseBooleanConverter" />
+    </UserControl.Resources>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center">
+            <control:GraphControl
+                x:Name="graphControl"
+                Items="{Binding SortingItems}"
+                Width="600"
+                Height="600"/>
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50"  />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="50"  />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="*"  />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="100" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="100" />
+                </Grid.ColumnDefinitions>
+                <Label Grid.Column="0" Content="#:" />
+                <TextBox Grid.Column="1" Height="20" TextAlignment="Center" VerticalContentAlignment="Center" Text="{Binding NumItems}" />
+                <Label Grid.Column="2" Content="Max:" />
+                <TextBox Grid.Column="3" Height="20" TextAlignment="Center" VerticalContentAlignment="Center" Text="{Binding MaxValue}" />
+                <Button Grid.Column="4" Height="20" Margin="2" Click="OnRandomize">Randomize</Button>
+                <Label Grid.Column="6" Content="Slow" />
+                <Slider Grid.Column="7"  Minimum="1" Maximum="1000" TickPlacement="BottomRight" TickFrequency="100" IsSnapToTickEnabled="True" IsDirectionReversed="True" Value="{Binding SwapTimeout}" />
+                <Label Grid.Column="08" Content="Fast" />
+                <Button Grid.Column="9" Height="20" Click="OnSort" IsEnabled="{Binding Sorting, Converter={StaticResource InverseBooleanConverter}}">Sort</Button>
+            </Grid>
+        </StackPanel>
+    </Grid>
+</UserControl>
