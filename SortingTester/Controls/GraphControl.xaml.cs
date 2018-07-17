@@ -84,6 +84,8 @@ namespace SortingTester.Controls
 
         private void DrawGraph()
         {
+            if (Items == null)
+                return;
             CalculateScalesAndDiameter();
 
             graphCanvas.Children.Clear();
@@ -109,6 +111,11 @@ namespace SortingTester.Controls
             var circle = (UIElement)LogicalTreeHelper.FindLogicalNode(graphCanvas, string.Format("circle{0}", i));
             if (circle != null)
                 graphCanvas.Children.Remove(circle);
+        }
+
+        private void OnSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            DrawGraph();
         }
     }
 }
