@@ -17,15 +17,16 @@ namespace SortingTester.Controls
         private Thread m_Thread;
         private ObservableCollection<int> m_SortingItems = null;
         public ObservableCollection<int> SortingItems { get { return m_SortingItems; } set { m_SortingItems = value; OnPropertyChanged("SortingItems"); } }
-        
+
         public bool Sorting { get { return m_Thread != null && m_Thread.IsAlive; } }
+        public bool SwapTimeoutEnabled { get { return NumItems < 500; } }
 
         private int m_NumItems = 100;
-        private int m_MaxValue { get; set; } = 100;
-        private int m_SwapTimeout { get; set; } = 1;
-        public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems"); } }
+        private int m_MaxValue = 100;
+        private int m_SwapTimeout = 1;
+        public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems"); OnPropertyChanged("SwapTimeout"); OnPropertyChanged("SwapTimeoutEnabled"); } }
         public int MaxValue { get { return m_MaxValue; } set { m_MaxValue = value; OnPropertyChanged("MaxValue"); } }
-        public int SwapTimeout { get { return m_SwapTimeout; } set { m_SwapTimeout = value; OnPropertyChanged("SwapTimeout"); } }
+        public int SwapTimeout { get { return SwapTimeoutEnabled ? m_SwapTimeout : -99; } set { m_SwapTimeout = value; OnPropertyChanged("SwapTimeout"); } }
 
         public void Randomize()
         {
@@ -54,10 +55,8 @@ namespace SortingTester.Controls
         private void SortThread()
         {
             BubbleSorter sorter = new BubbleSorter();
-            if (SwapTimeout > 0 && NumItems < 500)
-                sorter.SwapCallback = SwapCallback;
-            else
-                sorter.SortedCallback = SortedCallback;
+            sorter.SwapCallback = SwapCallback;
+            sorter.SortedCallback = SortedCallback;
             sorter.Sort(m_SortingItems.ToList(), 3);
 
             OnPropertyChanged("Sorting");
@@ -65,6 +64,8 @@ namespace SortingTester.Controls
 
         private void SwapCallback(int i, int j)
         {
+            if (SwapTimeout <= 0)
+                return;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 SortingItems.Swap(i, j);
@@ -74,6 +75,8 @@ namespace SortingTester.Controls
 
         private void SortedCallback(List<int> list)
         {
+            if (SwapTimeout > 0)
+                return;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 SortingItems = new ObservableCollection<int>(list);
