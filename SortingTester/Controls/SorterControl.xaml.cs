@@ -16,27 +16,41 @@ namespace SortingTester.Controls
     {
         private Thread m_Thread;
         private ObservableCollection<int> m_SortingItems = null;
-        public ObservableCollection<int> SortingItems { get { return m_SortingItems; } set { m_SortingItems = value; OnPropertyChanged("SortingItems"); } }
+        public ObservableCollection<int> SortingItems
+        {
+            get { return m_SortingItems; }
+            set
+            {
+                if (Sorting)
+                {
+                    m_Thread.Abort();
+                    m_Thread.Join();
+                    OnPropertyChanged("Sorting");
+                }
+
+                m_SortingItems = value;
+                
+                TimeElapsed = string.Empty;
+                OnPropertyChanged("SortingItems");
+                OnPropertyChanged("SwapTimeoutEnabled");
+                OnPropertyChanged("SwapTimeout");
+            }
+        }
 
         public bool Sorting { get { return m_Thread != null && m_Thread.IsAlive; } }
-        public bool SwapTimeoutEnabled { get { return NumItems < 500; } }
-
+        public bool SwapTimeoutEnabled { get { return (SortingItems != null) ? SortingItems.Count < 500 : false; } }
+        
         private int m_NumItems = 100;
         private int m_MaxValue = 100;
         private int m_SwapTimeout = 1;
-        public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems"); OnPropertyChanged("SwapTimeout"); OnPropertyChanged("SwapTimeoutEnabled"); } }
+        private string m_TimeElapsed;
+        public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems");  } }
         public int MaxValue { get { return m_MaxValue; } set { m_MaxValue = value; OnPropertyChanged("MaxValue"); } }
         public int SwapTimeout { get { return SwapTimeoutEnabled ? m_SwapTimeout : -99; } set { m_SwapTimeout = value; OnPropertyChanged("SwapTimeout"); } }
+        public string TimeElapsed { get { return m_TimeElapsed; } set { m_TimeElapsed = value; OnPropertyChanged("TimeElapsed"); } }
 
         public void Randomize()
         {
-            if (Sorting)
-            {
-                m_Thread.Abort();
-                m_Thread.Join();
-                OnPropertyChanged("Sorting");
-            }
-
             SortingItems = new ObservableCollection<int>(Utilities.GenerateRandomList(NumItems, MaxValue));
         }
 
@@ -73,13 +87,14 @@ namespace SortingTester.Controls
             System.Threading.Thread.Sleep(SwapTimeout);
         }
 
-        private void SortedCallback(List<int> list)
+        private void SortedCallback(List<int> list, string timeElapsed)
         {
             if (SwapTimeout > 0)
                 return;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
                 SortingItems = new ObservableCollection<int>(list);
+                TimeElapsed = timeElapsed;
             }));
         }
 
@@ -97,6 +112,7 @@ namespace SortingTester.Controls
     public partial class SorterControl : UserControl
     {
         private SorterViewModel m_VM = new SorterViewModel();
+        public SorterViewModel VM { get { return m_VM; } }
 
         public SorterControl()
         {

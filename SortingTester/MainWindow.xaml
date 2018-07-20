@@ -8,6 +8,29 @@
         mc:Ignorable="d"
         Title="Sorting" Height="900" Width="900">
     <Grid>
-        <control:SorterControl Height="800" Width="800"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        <UniformGrid Grid.Row="0" Name="sortersGrid" Rows="1" />
+        <Border Grid.Row="1" BorderBrush="Gray" BorderThickness="0,1" Background="AliceBlue">
+            <Grid Margin="4">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <StackPanel Grid.Column="0" Orientation="Horizontal">
+                    <Button Padding="4" Margin="4,2" Height="30" Click="OnRandomizeAll">Randomize All</Button>
+                    <Button Padding="4" Margin="4,2" Height="30" Click="OnRandomizeAllToSame">Randomize All to Same</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="1" Orientation="Horizontal">
+                    <Button Padding="4" Margin="4,2" Height="30" Click="OnAddSorter">Add Sorter</Button>
+                </StackPanel>
+                <StackPanel Grid.Column="2" Orientation="Horizontal" HorizontalAlignment="Right">
+                    <Button Padding="4" Margin="4,2" Height="30" Click="OnSortAll">Sort All</Button>
+                </StackPanel>
+            </Grid>
+        </Border>
     </Grid>
 </Window>
