@@ -4,7 +4,7 @@ namespace Sorting
 {
     /// <summary>
     /// Bubble sort implementation.
-    /// Repeatedly pass through the list, comparing items, until no swap is made. Larger items "bubble" to the top.
+    /// Repeatedly iterate through the list, comparing and swapping items, until no swap is made. Larger items "bubble" to the top.
     /// Best-case:      O(n)
     /// Average-case:   O(n^2)
     /// Worst-case:     O(n^2)
