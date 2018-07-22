@@ -2,6 +2,12 @@
 
 namespace Sorting
 {
+    /// <summary>
+    /// Bubble sort implementation.
+    /// Best-case:      O(n)
+    /// Average-case:   O(n^2)
+    /// Worst-case:     O(n^2)
+    /// </summary>
     public class BubbleSorter : Sorter
     {
         protected override void HandleSort(List<int> list, int version)
@@ -11,6 +17,7 @@ namespace Sorting
                 case 1: Sort1(list); break;
                 case 2: Sort2(list); break;
                 case 3: Sort3(list); break;
+                default: Sort3(list); break;
             }
         }
 

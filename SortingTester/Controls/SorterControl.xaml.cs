@@ -44,10 +44,25 @@ namespace SortingTester.Controls
         private int m_MaxValue = 100;
         private int m_SwapTimeout = 1;
         private string m_TimeElapsed;
+        private string m_SelectedSorterType;
         public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems");  } }
         public int MaxValue { get { return m_MaxValue; } set { m_MaxValue = value; OnPropertyChanged("MaxValue"); } }
         public int SwapTimeout { get { return SwapTimeoutEnabled ? m_SwapTimeout : -99; } set { m_SwapTimeout = value; OnPropertyChanged("SwapTimeout"); } }
         public string TimeElapsed { get { return m_TimeElapsed; } set { m_TimeElapsed = value; OnPropertyChanged("TimeElapsed"); } }
+        public string SelectedSorterType { get { return m_SelectedSorterType; } set { m_SelectedSorterType = value; OnPropertyChanged("SelectedSorterType"); } }
+
+        public class SorterType { public string Name { get; set; } }
+        public ObservableCollection<SorterType> SorterTypes { get; set; }
+
+        public SorterViewModel()
+        {
+            SorterTypes = new ObservableCollection<SorterType>()
+            {
+                new SorterType() { Name = "Bubble" },
+                new SorterType() { Name = "Insertion" }
+            };
+            m_SelectedSorterType = SorterTypes[0].Name;
+        }
 
         public void Randomize()
         {
@@ -66,14 +81,36 @@ namespace SortingTester.Controls
             OnPropertyChanged("Sorting");
         }
 
+        private Sorter GetSorter()
+        {
+            switch (SelectedSorterType)
+            {
+                case "Bubble": return new BubbleSorter();
+                case "Insertion": return new InsertionSorter();
+                default: return null;
+            }
+        }
+
         private void SortThread()
         {
-            BubbleSorter sorter = new BubbleSorter();
+            Sorter sorter = GetSorter();
+            sorter.SetCallback = SetCallback;
             sorter.SwapCallback = SwapCallback;
             sorter.SortedCallback = SortedCallback;
-            sorter.Sort(m_SortingItems.ToList(), 3);
+            sorter.Sort(m_SortingItems.ToList());
 
             OnPropertyChanged("Sorting");
+        }
+
+        private void SetCallback(int i, int value)
+        {
+            if (SwapTimeout <= 0)
+                return;
+            Application.Current.Dispatcher.BeginInvoke(new Action(() =>
+            {
+                SortingItems[i] = value;
+            }));
+            System.Threading.Thread.Sleep(SwapTimeout);
         }
 
         private void SwapCallback(int i, int j)

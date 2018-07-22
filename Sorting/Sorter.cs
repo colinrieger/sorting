@@ -6,6 +6,7 @@ namespace Sorting
 {
     public abstract class Sorter
     {
+        public Action<int, int> SetCallback { get; set; }
         public Action<int, int> SwapCallback { get; set; }
         public Action<List<int>, string> SortedCallback { get; set; }
 
@@ -20,7 +21,7 @@ namespace Sorting
             }
         }
 
-        public void Sort(List<int> list, int version = 1)
+        public void Sort(List<int> list, int version = -1)
         {
             m_StopWatch.Restart();
             HandleSort(list, version);
