@@ -4,6 +4,7 @@ namespace Sorting
 {
     /// <summary>
     /// Insertion sort implementation.
+    /// Iterate through the list, comparing an item to the ones before it and insert it at its lowest position.
     /// Best-case:      O(n)
     /// Average-case:   O(n^2)
     /// Worst-case:     O(n^2)

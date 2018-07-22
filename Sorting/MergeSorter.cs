@@ -4,6 +4,7 @@ namespace Sorting
 {
     /// <summary>
     /// Merge sort implementation.
+    /// Divide and conquer. Split list into n sublists then merge the sublists, comparing their elements.
     /// Best-case:      O(n log n)
     /// Average-case:   O(n log n)
     /// Worst-case:     O(n log n)
