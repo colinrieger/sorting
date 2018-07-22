@@ -60,7 +60,8 @@ namespace SortingTester.Controls
             {
                 new SorterType() { Name = "Bubble" },
                 new SorterType() { Name = "Insertion" },
-                new SorterType() { Name = "Merge" }
+                new SorterType() { Name = "Merge" },
+                new SorterType() { Name = "Selection" }
             };
             m_SelectedSorterType = SorterTypes[0].Name;
         }
@@ -89,6 +90,7 @@ namespace SortingTester.Controls
                 case "Bubble": return new BubbleSorter();
                 case "Insertion": return new InsertionSorter();
                 case "Merge": return new MergeSorter();
+                case "Selection": return new SelectionSorter();
                 default: return null;
             }
         }
