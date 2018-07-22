@@ -59,6 +59,7 @@ namespace SortingTester.Controls
             SorterTypes = new ObservableCollection<SorterType>()
             {
                 new SorterType() { Name = "Bubble" },
+                new SorterType() { Name = "Heap" },
                 new SorterType() { Name = "Insertion" },
                 new SorterType() { Name = "Merge" },
                 new SorterType() { Name = "Selection" }
@@ -88,6 +89,7 @@ namespace SortingTester.Controls
             switch (SelectedSorterType)
             {
                 case "Bubble": return new BubbleSorter();
+                case "Heap": return new HeapSorter();
                 case "Insertion": return new InsertionSorter();
                 case "Merge": return new MergeSorter();
                 case "Selection": return new SelectionSorter();
