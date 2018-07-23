@@ -62,6 +62,7 @@ namespace SortingTester.Controls
                 new SorterType() { Name = "Heap" },
                 new SorterType() { Name = "Insertion" },
                 new SorterType() { Name = "Merge" },
+                new SorterType() { Name = "Quick" },
                 new SorterType() { Name = "Selection" }
             };
             m_SelectedSorterType = SorterTypes[0].Name;
@@ -92,6 +93,7 @@ namespace SortingTester.Controls
                 case "Heap": return new HeapSorter();
                 case "Insertion": return new InsertionSorter();
                 case "Merge": return new MergeSorter();
+                case "Quick": return new QuickSorter();
                 case "Selection": return new SelectionSorter();
                 default: return null;
             }
