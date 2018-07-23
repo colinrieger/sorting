@@ -16,15 +16,18 @@ namespace SortingTester
             AddSorter();
         }
 
+        const int c_MaxSorterColumns = 3;
+        const int c_MaxSorterRows = 2;
+
         private void AddSorter()
         {
             int currentChildren = sortersGrid.Children.Count;
-            if (currentChildren == 8)
+            if (currentChildren == (c_MaxSorterColumns * c_MaxSorterRows))
                 return;
-
-            if (currentChildren < 4)
+            
+            if (currentChildren < c_MaxSorterColumns)
                 sortersGrid.Columns += 1;
-            else if (currentChildren == 4)
+            else if ((currentChildren % c_MaxSorterColumns) == 0)
                 sortersGrid.Rows += 1;
 
             SorterControl sorterControl = new SorterControl();
