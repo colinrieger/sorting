@@ -1,2 +1,2 @@
 # sorting
-c# sorting class library with a wpf tester
+sorting class library with a wpf tester
