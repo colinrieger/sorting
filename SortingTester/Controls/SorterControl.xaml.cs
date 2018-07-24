@@ -116,7 +116,8 @@ namespace SortingTester.Controls
                 return;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                SortingItems[i] = value;
+                if (SortingItems.Count > i)
+                    SortingItems[i] = value;
             }));
             System.Threading.Thread.Sleep(SwapTimeout);
         }
@@ -127,7 +128,8 @@ namespace SortingTester.Controls
                 return;
             Application.Current.Dispatcher.BeginInvoke(new Action(() =>
             {
-                SortingItems.Swap(i, j);
+                if (SortingItems.Count > i && SortingItems.Count > j)
+                    SortingItems.Swap(i, j);
             }));
             System.Threading.Thread.Sleep(SwapTimeout);
         }
