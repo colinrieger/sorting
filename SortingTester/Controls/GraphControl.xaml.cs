@@ -93,22 +93,22 @@ namespace SortingTester.Controls
                 AddCircleToGraphCanvasByIndex(i);
         }
 
-        private void AddCircleToGraphCanvasByIndex(int i)
+        private void AddCircleToGraphCanvasByIndex(int index)
         {
             Ellipse circle = new Ellipse();
-            circle.Name = string.Format("circle{0}", i);
+            circle.Name = string.Format("circle{0}", index);
             circle.Width = circle.Height = m_CircleDiameter;
             circle.StrokeThickness = 1;
             circle.Stroke = Brushes.Blue;
             circle.Fill = Brushes.Blue;
-            Canvas.SetLeft(circle, (i * m_XScale) + c_MarginOffset);
-            Canvas.SetBottom(circle, (Items[i] * m_YScale) + c_MarginOffset);
+            Canvas.SetLeft(circle, (index * m_XScale) + c_MarginOffset);
+            Canvas.SetBottom(circle, (Items[index] * m_YScale) + c_MarginOffset);
             graphCanvas.Children.Add(circle);
         }
 
-        private void RemoveCircleFromGraphCanvasByIndex(int i)
+        private void RemoveCircleFromGraphCanvasByIndex(int index)
         {
-            var circle = (UIElement)LogicalTreeHelper.FindLogicalNode(graphCanvas, string.Format("circle{0}", i));
+            var circle = (UIElement)LogicalTreeHelper.FindLogicalNode(graphCanvas, string.Format("circle{0}", index));
             if (circle != null)
                 graphCanvas.Children.Remove(circle);
         }

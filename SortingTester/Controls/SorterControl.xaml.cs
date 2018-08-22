@@ -41,12 +41,10 @@ namespace SortingTester.Controls
         public bool SwapTimeoutEnabled { get { return (SortingItems != null) ? SortingItems.Count < 500 : false; } }
         
         private int m_NumItems = 100;
-        private int m_MaxValue = 100;
         private int m_SwapTimeout = 1;
         private string m_TimeElapsed;
         private string m_SelectedSorterType;
         public int NumItems { get { return m_NumItems; } set { m_NumItems = value; OnPropertyChanged("NumItems");  } }
-        public int MaxValue { get { return m_MaxValue; } set { m_MaxValue = value; OnPropertyChanged("MaxValue"); } }
         public int SwapTimeout { get { return SwapTimeoutEnabled ? m_SwapTimeout : -99; } set { m_SwapTimeout = value; OnPropertyChanged("SwapTimeout"); } }
         public string TimeElapsed { get { return m_TimeElapsed; } set { m_TimeElapsed = value; OnPropertyChanged("TimeElapsed"); } }
         public string SelectedSorterType { get { return m_SelectedSorterType; } set { m_SelectedSorterType = value; OnPropertyChanged("SelectedSorterType"); } }
@@ -70,7 +68,7 @@ namespace SortingTester.Controls
 
         public void Randomize()
         {
-            SortingItems = new ObservableCollection<int>(Utilities.GenerateRandomList(NumItems, MaxValue));
+            SortingItems = new ObservableCollection<int>(Utilities.GenerateRandomList(NumItems));
         }
 
         public void Sort()

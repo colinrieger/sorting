@@ -19,13 +19,13 @@ namespace Sorting
             list[j] = tmp;
         }
 
-        public static List<int> GenerateRandomList(int count, int maxValue)
+        public static List<int> GenerateRandomList(int count)
         {
             Random random = new Random(DateTime.Now.Millisecond);
 
             List<int> randomList = new List<int>();
             while (0 < count--)
-                randomList.Add(random.Next(maxValue));
+                randomList.Insert(random.Next(randomList.Count), count);
 
             return randomList;
         }
